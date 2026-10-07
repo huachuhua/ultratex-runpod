@@ -1,0 +1,7 @@
+# Reconstrucción rápida: reutiliza la imagen completa ya validada (dependencias +
+# pesos) y solo reemplaza el handler y el workflow. Para cambiar dependencias o
+# pesos, construir el Dockerfile completo y actualizar este digest.
+FROM ghcr.io/huachuhua/ultratex-runpod:latest
+WORKDIR /app
+COPY handler.py result_transport.py workflow.json ./
+CMD ["python", "-u", "handler.py"]

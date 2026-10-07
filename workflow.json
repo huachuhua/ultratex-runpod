@@ -1,0 +1,204 @@
+{
+ "10": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "9",
+    0
+   ],
+   "text": ""
+  }
+ },
+ "11": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "clip": [
+    "9",
+    0
+   ],
+   "text": ""
+  }
+ },
+ "12": {
+  "class_type": "UltraTexBake",
+  "inputs": {
+   "albedo_views": [
+    "4",
+    0
+   ],
+   "best_view_mix": 0.5,
+   "edge_feather_px": 6,
+   "filename_prefix": "UltraTex/job",
+   "metallic_roughness_views": [
+    "24",
+    0
+   ],
+   "prep": [
+    "2",
+    0
+   ],
+   "texture_size": 2048,
+   "view_weight_power": 4,
+   "views_2_use": "all"
+  }
+ },
+ "19": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "__REFERENCE__"
+  }
+ },
+ "2": {
+  "class_type": "UltraTexPrep",
+  "inputs": {
+   "atlas_size": 4096,
+   "mask_meaning": "background (LoadImage)",
+   "mesh_path": "",
+   "reference_alignment": "fit_front_silhouette",
+   "reference_image": [
+    "19",
+    0
+   ],
+   "reference_mask": [
+    "19",
+    1
+   ],
+   "render_size": 4096,
+   "trimesh": [
+    "22",
+    0
+   ],
+   "uv_mode": "comfy_gpu"
+  }
+ },
+ "22": {
+  "class_type": "UltraTexLoadMesh",
+  "inputs": {
+   "glb_path": "__MESH__",
+   "only_vertices_and_faces": true
+  }
+ },
+ "23": {
+  "class_type": "UltraTexLoraLoader",
+  "inputs": {
+   "lora_name": "ultratex_flux2_mr.safetensors",
+   "model": [
+    "5",
+    0
+   ],
+   "strength": 1
+  }
+ },
+ "24": {
+  "class_type": "UltraTexSampler",
+  "inputs": {
+   "attention": "ultratex_sparse",
+   "denoise": 1,
+   "drop_background_tokens": true,
+   "guidance": 4,
+   "memory_factor": 0,
+   "model": [
+    "23",
+    0
+   ],
+   "negative": [
+    "11",
+    0
+   ],
+   "positive": [
+    "10",
+    0
+   ],
+   "prep": [
+    "2",
+    0
+   ],
+   "resolution": 1024,
+   "seed": 12345,
+   "sparse_topk": 0.2,
+   "steps": 25,
+   "token_chunk": 8192,
+   "vae": [
+    "8",
+    0
+   ]
+  }
+ },
+ "4": {
+  "class_type": "UltraTexSampler",
+  "inputs": {
+   "attention": "ultratex_sparse",
+   "denoise": 1,
+   "drop_background_tokens": true,
+   "guidance": 4,
+   "memory_factor": 0,
+   "model": [
+    "7",
+    0
+   ],
+   "negative": [
+    "11",
+    0
+   ],
+   "positive": [
+    "10",
+    0
+   ],
+   "prep": [
+    "2",
+    0
+   ],
+   "resolution": 1024,
+   "seed": 12345,
+   "sparse_topk": 0.2,
+   "steps": 25,
+   "token_chunk": 8192,
+   "vae": [
+    "8",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "flux-2-klein-base-9b-fp8.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "6": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "flux2-vae.safetensors"
+  }
+ },
+ "7": {
+  "class_type": "UltraTexLoraLoader",
+  "inputs": {
+   "lora_name": "ultratex_flux2.safetensors",
+   "model": [
+    "5",
+    0
+   ],
+   "strength": 1
+  }
+ },
+ "8": {
+  "class_type": "UltraTexForegroundDecoder",
+  "inputs": {
+   "decoder_name": "ultratex_flux2_decoder.pt",
+   "vae": [
+    "6",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_8b_fp8mixed.safetensors",
+   "device": "default",
+   "type": "flux2"
+  }
+ }
+}
